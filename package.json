@@ -26,7 +26,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev-frontend": "npm i && react-scripts start",
+    "dev-backend-deps": "pip install -r python_requirements.txt",
+    "dev-backend": "npm run dev-backend-deps && cd backend && cd model && runipy Machine_Learning.ipynb && cd .. && python server.py"
   },
   "eslintConfig": {
     "extends": [
