@@ -18,11 +18,11 @@ def predict():
     }
 
     mtransValues = {
-        'Automobile': 0,
-        'Bike': 1,
-        'Motorbike': 2,
-        'Public_Transportation': 3,
-        'Walking': 4,
+        'Automobile': 0.0,
+        'Bike': 1.0,
+        'Motorbike': 2.0,
+        'Public_Transportation': 3.0,
+        'Walking': 4.0,
     }
 
     pred = model.predict(np.array([[
