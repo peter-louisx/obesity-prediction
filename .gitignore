@@ -5,6 +5,7 @@ node_modules
 /node_modules
 /.pnp
 .pnp.js
+backend/model/model.pkl
 
 # testing
 /coverage
