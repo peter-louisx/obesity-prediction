@@ -35,6 +35,7 @@ function App() {
   });
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
+    console.log("CALLED");
     const input: ModelAttributes = {
       gender: data.gender,
       age: data.age,
@@ -54,6 +55,7 @@ function App() {
     };
 
     const res = await predict(input);
+    console.log(res);
     setResult(res.data);
   }
 
@@ -106,13 +108,13 @@ function App() {
           {/* Age */}
           <div className="field">
             <label>Age:</label>
-            <input {...register("age")} type="number" min={0} step={1} defaultValue={0} />
+            <input {...register("age", {valueAsNumber: true})} type="number" min={0} step={1} defaultValue={0} />
           </div>
 
           {/* Weight */}
           <div className="field">
             <label>Weight (in kg):</label>
-            <input {...register("weight")} type="number" min={0} step={0.01} defaultValue={0} />
+            <input {...register("weight", {valueAsNumber: true})} type="number" min={0} step={0.01} defaultValue={0} />
           </div>
 
           {/* Family History */}
@@ -138,7 +140,7 @@ function App() {
           {/* Vegetables  Consumption */}
           <div className="field">
             <label>Do you usually eat vegetables in your meals?</label>
-            <select {...register("fcvc")}>
+            <select {...register("fcvc", {valueAsNumber: true})}>
               {[1, 2, 3].map((option, key: number) => (
                 <option key={key} value={option}>{processLabel(String(option))}</option>
               ))}
@@ -148,7 +150,7 @@ function App() {
           {/* Main Meals Frequency */}
           <div className="field">
             <label>How many main meals do you have daily?</label>
-            <select {...register("ncp")}>
+            <select {...register("ncp", {valueAsNumber: true})}>
               {[1, 2, 3, 4].map((option, key: number) => (
                 <option key={key} value={option}>{processLabel(String(option))}</option>
               ))}
@@ -178,7 +180,7 @@ function App() {
           {/* Litres of Water drunk daily */}
           <div className="field">
             <label>How much water do you drink daily? (in litres)</label>
-            <select {...register("ch2o")}>
+            <select {...register("ch2o", {valueAsNumber: true})}>
               {[1, 2, 3].map((option, key: number) => (
                 <option key={key} value={option}>{processLabel(String(option))}</option>
               ))}
@@ -198,7 +200,7 @@ function App() {
           {/* Physical Activity */}
           <div className="field">
             <label>How often do you have physical activity?</label>
-            <select {...register("faf")}>
+            <select {...register("faf", {valueAsNumber: true})}>
               {[1, 2, 3].map((option, key: number) => (
                 <option key={key} value={option}>{processLabel(String(option))}</option>
               ))}
@@ -208,7 +210,7 @@ function App() {
           {/* Technology Use */}
           <div className="field">
             <label>How much time do you use technological devices such as cell phone, videogames, television, computer and others?</label>
-            <select {...register("tue")}>
+            <select {...register("tue", {valueAsNumber: true})}>
               {[0, 1, 2].map((option, key: number) => (
                 <option key={key} value={option}>{processLabel(String(option))}</option>
               ))}
@@ -235,7 +237,11 @@ function App() {
             </select>
           </div>
 
-          <button type="submit">Submit</button>
+          <button type="submit"
+            onClick={() => {
+              console.log(errors);
+            }}
+          >Submit</button>
 
         </form>
 
