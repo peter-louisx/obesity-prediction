@@ -1,6 +1,6 @@
 import axios from "axios";
-import ModelAttributes from "./types";
-const API_URL = "localhost:5000";
+import ModelAttributes from "../types";
+const API_URL = "http://localhost:5000";
 
 export default async function predict(input: ModelAttributes) {
     return await axios.request({
