@@ -2,15 +2,15 @@ from flask import Flask, request, jsonify
 import joblib
 import numpy as np
 from flask_cors import CORS
+import pickle
 
 app = Flask(__name__)
 CORS(app)
 
-model = joblib.load('model/model.pkl')
-
+model = pickle.load(open('model/model.pkl', 'rb'))
 
 @app.route('/predict', methods=['POST'])
-def predict():
+def predict(request):
 
     yesOrNoValues = {
         'yes': 1.0,
