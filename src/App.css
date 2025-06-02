@@ -13,6 +13,13 @@
   color: #61dafb;
 }
 
+.main-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .main-form :not(:last-child) {
   margin-bottom: 2rem;
 }
@@ -20,19 +27,35 @@
 .field {
   display: flex;
   flex-direction: column;
-  width: calc(100vw * 0.25)
+  width: calc(100vw * 0.25);
 }
 
 .field :first-child {
   margin-bottom: 1rem;
 }
 
-select, input {
+.button {
+  border-radius: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #4c8af4;
+  color: #fff;
+  border: 0;
+}
+
+.title {
+  color: #4c8af4;
+}
+
+select,
+input {
   outline: none;
   border: none;
   box-shadow: none;
   /* appearance: none; */
-  padding: .5rem;
+  padding: 0.5rem;
   width: 100%;
   font-size: 1rem;
 }
