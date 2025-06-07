@@ -1,0 +1,19 @@
+.card-container {
+  border: 2px solid #9a9797;
+  border-radius: 12px; /* Soft circular corners */
+  padding: 32px;
+}
+
+.card-title-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.card-icon {
+  margin: 4px 24px 0 0 !important;
+}
+
+.card-title {
+  margin: 0;
+}
