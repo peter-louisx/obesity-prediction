@@ -10,37 +10,26 @@ CORS(app)
 model = pickle.load(open('model/model.pkl', 'rb'))
 
 @app.route('/predict', methods=['POST'])
-def predict(request):
-
-    yesOrNoValues = {
-        'yes': 1.0,
-        'no': 0.0,
+def predict():
+    caeccalcValues = {
+        'Sometimes': 0.0,
+        'Frequently': 1.0,
+        'Always': 2.0,
+        'no': 3.0, 
     }
 
-    mtransValues = {
-        'Automobile': 0.0,
-        'Bike': 1.0,
-        'Motorbike': 2.0,
-        'Public_Transportation': 3.0,
-        'Walking': 4.0,
-    }
 
     pred = model.predict(np.array([[
         float(request.json['age']),
         float(request.json['height']),
         float(request.json['weight']),
-        yesOrNoValues[request.json['family_history']],
-        yesOrNoValues[request.json['favc']],
         float(request.json['fcvc']),
         float(request.json['ncp']),
-        float(request.json['caec']),
-        yesOrNoValues[request.json['smoke']],
+        caeccalcValues[request.json['caec']],
         float(request.json['ch2o']),
-        yesOrNoValues[request.json['scc']],
         float(request.json['faf']),
         float(request.json['tue']),
-        float(request.json['calc']),
-        mtransValues[request.json['mtrans']]
+        caeccalcValues[request.json['calc']],
     ]]))
 
     target_labels = {
@@ -58,8 +47,9 @@ def predict(request):
             pred = key
             break
     
-    return jsonify({'prediction': pred})
+    return jsonify({'prediction': pred.replace("_", " ")})
 
 if __name__ == "__main__":
-    app.run(debug=True)  # Runs on http://127.0.0.1:5000 by default
+    app.run(debug=True, host='0.0.0.0')  # Runs on http://127.0.0.1:5000 by default
+    #change host to 0.0.0.
     print('hello world')

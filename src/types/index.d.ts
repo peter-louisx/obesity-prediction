@@ -3,15 +3,14 @@ import { ZodSchema } from "zod";
 
 export default interface ModelAttributes {
   age: number;
-  weight: number;
   height: number;
+  weight: number;
   fcvc: number;
   ncp: number;
-  caec: "Always" | "Frequently" | "Sometimes" | "no";
   ch2o: number;
   faf: number;
   tue: number;
-  calc: "Always" | "Frequently" | "Sometimes" | "no";
+  gender: "Male" | "Female";
 }
 
 export type ObesityCategoryType =
