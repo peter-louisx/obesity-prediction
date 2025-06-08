@@ -10,7 +10,7 @@ CORS(app)
 
 model = pickle.load(open('model/model.pkl', 'rb'))
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
     try:
         input_df = pd.DataFrame([{
