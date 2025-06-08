@@ -450,7 +450,7 @@ export default function Form() {
           </Card>
 
           {result && (
-            <div className="mt-4 p-6 bg-white rounded-lg shadow-lg text-center py-8">
+            <div className="mt-4 p-6 bg-white rounded-3xl shadow-lg text-center py-8">
               <h2 className="text-4xl font-bold mb-2">Prediction Result</h2>
 
               <p className="text-lg text-gray-700 mt-4">
