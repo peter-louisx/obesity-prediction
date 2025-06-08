@@ -14,7 +14,7 @@ export default function Card({
   children: ReactNode;
 }) {
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+    <div className="bg-white rounded-3xl shadow-lg p-8 md:p-12">
       {(icon || title) && (
         <div className="card-title-container flex justify-center gap-4">
           <>
