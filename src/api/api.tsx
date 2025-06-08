@@ -1,6 +1,6 @@
 import axios from "axios";
 import ModelAttributes from "../types";
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export default async function predict(input: ModelAttributes) {
   return await axios.request({
