@@ -14,13 +14,13 @@ export default interface ModelAttributes {
 }
 
 export type ObesityCategoryType =
-  | "Insufficient_Weight"
-  | "Normal_Weight"
-  | "Overweight_Level_I"
-  | "Overweight_Level_II"
-  | "Obesity_Type_I"
-  | "Obesity_Type_II"
-  | "Obesity_Type_III";
+  | "Insufficient Weight"
+  | "Normal Weight"
+  | "Overweight Level I"
+  | "Overweight Level II"
+  | "Obesity Type I"
+  | "Obesity Type II"
+  | "Obesity Type III";
 
 export interface FieldType<T extends ZodSchema> {
   register: UseFormRegister<T>;

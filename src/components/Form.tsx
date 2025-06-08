@@ -17,24 +17,11 @@ export default function Form() {
     age: z.number(),
     height: z.number().min(145).max(198),
     weight: z.number(),
-    family_history: z.enum(["yes", "no"]),
-    favc: z.enum(["yes", "no"]),
     fcvc: z.number(),
     ncp: z.number(),
-    caec: z.enum(["Always", "Frequently", "Sometimes", "no"]),
-    smoke: z.enum(["yes", "no"]),
     ch2o: z.number(),
-    scc: z.enum(["yes", "no"]),
     faf: z.number(),
     tue: z.number(),
-    calc: z.enum(["Always", "Frequently", "Sometimes", "no"]),
-    mtrans: z.enum([
-      "Public_Transportation",
-      "Automobile",
-      "Walking",
-      "Motorbike",
-      "Bike",
-    ]),
   });
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
@@ -43,18 +30,11 @@ export default function Form() {
       age: data.age,
       height: data.height,
       weight: data.weight,
-      family_history: data.family_history,
-      favc: data.favc,
       fcvc: data.fcvc,
       ncp: data.ncp,
-      caec: data.caec,
-      smoke: data.smoke,
       ch2o: data.ch2o,
-      scc: data.scc,
       faf: data.faf,
       tue: data.tue,
-      calc: data.calc,
-      mtrans: data.mtrans,
     };
 
     setSubmitLoading(true);
@@ -98,20 +78,6 @@ export default function Form() {
     label: processLabel(option),
   }));
 
-  const familyHistoryOptions = schema.shape.family_history._def.values.map(
-    (option) => ({
-      value: option,
-      label: processLabel(option),
-    })
-  );
-
-  const highCaloricFoodConsumptionOptions = schema.shape.favc._def.values.map(
-    (option) => ({
-      value: option,
-      label: processLabel(option),
-    })
-  );
-
   const vegetableConsumptionOptions = [1, 2, 3].map((option) => ({
     value: option.toString(),
     label: option.toString(),
@@ -122,29 +88,10 @@ export default function Form() {
     label: option.toString(),
   }));
 
-  const foodBetweenMealsOptions = schema.shape.caec._def.values.map(
-    (option) => ({
-      value: option,
-      label: processLabel(option),
-    })
-  );
-
-  const smokeOptions = schema.shape.smoke._def.values.map((option) => ({
-    value: option,
-    label: processLabel(option),
-  }));
-
   const waterDrunkDailyOptions = [1, 2, 3].map((option) => ({
     value: option.toString(),
     label: option.toString(),
   }));
-
-  const caloriesMonitoringOptions = schema.shape.scc._def.values.map(
-    (option) => ({
-      value: option,
-      label: processLabel(option),
-    })
-  );
 
   const physicalActivitiesOptions = [1, 2, 3].map((option) => ({
     value: option.toString(),
@@ -155,18 +102,6 @@ export default function Form() {
     value: option.toString(),
     label: option.toString(),
   }));
-
-  const alcoholicDrinkOptions = schema.shape.calc._def.values.map((option) => ({
-    value: option,
-    label: processLabel(option),
-  }));
-
-  const transportationUsageOptions = schema.shape.mtrans._def.values.map(
-    (option) => ({
-      value: option,
-      label: processLabel(option),
-    })
-  );
 
   return (
     <div
@@ -254,34 +189,9 @@ export default function Form() {
                 className="border border-blue-400 rounded-md"
               />
             </div>
-
-            {/* Family History */}
-            <div className="field">
-              <label>Obesity in family history?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue(
-                    "family_history",
-                    selectedOption?.value as "yes" | "no"
-                  );
-                }}
-                options={familyHistoryOptions}
-              />
-            </div>
           </Card>
 
           <Card title="Daily Habits" icon="AlarmClock">
-            {/* High Caloric Food Consumption */}
-            <div className="field">
-              <label>Do you eat high caloric food frequently?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue("favc", selectedOption?.value as "yes" | "no");
-                }}
-                options={highCaloricFoodConsumptionOptions}
-              />
-            </div>
-
             {/* Vegetables Consumption */}
             <div className="field">
               <label>Do you usually eat vegetables in your meals?</label>
@@ -304,35 +214,6 @@ export default function Form() {
               />
             </div>
 
-            {/* Food Between Meals */}
-            <div className="field">
-              <label>Do you eat any food between meals?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue(
-                    "caec",
-                    selectedOption?.value as
-                      | "Always"
-                      | "Frequently"
-                      | "Sometimes"
-                      | "no"
-                  );
-                }}
-                options={foodBetweenMealsOptions}
-              />
-            </div>
-
-            {/* Smoke or Not */}
-            <div className="field">
-              <label>Do you smoke?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue("smoke", selectedOption?.value as "yes" | "no");
-                }}
-                options={smokeOptions}
-              />
-            </div>
-
             {/* Litres of Water drunk daily */}
             <div className="field">
               <label>How much water do you drink daily? (in litres)</label>
@@ -341,17 +222,6 @@ export default function Form() {
                   setValue("ch2o", Number(selectedOption?.value));
                 }}
                 options={waterDrunkDailyOptions}
-              />
-            </div>
-
-            {/* Calories Monitoring */}
-            <div className="field">
-              <label>Do you monitor the calories you eat daily?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue("scc", selectedOption?.value as "yes" | "no");
-                }}
-                options={caloriesMonitoringOptions}
               />
             </div>
 
@@ -378,43 +248,6 @@ export default function Form() {
                   setValue("tue", Number(selectedOption?.value));
                 }}
                 options={technologyUsageOptions}
-              />
-            </div>
-
-            {/* Alcoholic Drink */}
-            <div className="field">
-              <label>How often do you drink alcohol?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue(
-                    "calc",
-                    selectedOption?.value as
-                      | "Always"
-                      | "Frequently"
-                      | "Sometimes"
-                      | "no"
-                  );
-                }}
-                options={alcoholicDrinkOptions}
-              />
-            </div>
-
-            {/* Transportation Usage */}
-            <div className="field">
-              <label>What is your main means of transportation?</label>
-              <SelectField
-                onChange={(selectedOption) => {
-                  setValue(
-                    "mtrans",
-                    selectedOption?.value as
-                      | "Public_Transportation"
-                      | "Automobile"
-                      | "Walking"
-                      | "Motorbike"
-                      | "Bike"
-                  );
-                }}
-                options={transportationUsageOptions}
               />
             </div>
 
