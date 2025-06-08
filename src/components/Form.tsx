@@ -15,7 +15,7 @@ export default function Form() {
     gender: z.enum(["Male", "Female"]),
     // age: z.number().min(14).max(61),
     age: z.number(),
-    // height: z.number().min(145).max(198),
+    height: z.number().min(145).max(198),
     weight: z.number(),
     // weight: z.number().min(39).max(173),
     family_history: z.enum(["yes", "no"]),
@@ -42,6 +42,7 @@ export default function Form() {
     const input: ModelAttributes = {
       gender: data.gender,
       age: data.age,
+      height: data.height,
       weight: data.weight,
       family_history: data.family_history,
       favc: data.favc,
@@ -57,11 +58,8 @@ export default function Form() {
       mtrans: data.mtrans,
     };
 
-    console.log("Input data:", input);
-
     const res = await predict(input);
-    console.log(res);
-    setResult(res.data);
+    setResult(res.data.prediction as ObesityCategoryType);
   };
 
   const capitalize = (str: string) =>
@@ -166,7 +164,7 @@ export default function Form() {
   );
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-blue-50">
+    <div className="bg-gradient-to-br from-gray-50 to-blue-50" id="form">
       <div className="text-center py-12">
         <div className="main-title">
           <h1 className="text-4xl font-bold">Get Your Health Prediction</h1>
@@ -222,6 +220,25 @@ export default function Form() {
                 min={0}
                 step={0.01}
                 defaultValue={0}
+                style={{
+                  border: "1px solid #cbd5e1",
+                  padding: "0.8rem",
+                }}
+                className="border border-blue-400 rounded-md"
+              />
+            </div>
+
+            {/* Height */}
+
+            <div className="field">
+              <label>Height (in cm):</label>
+              <input
+                {...register("height", { valueAsNumber: true })}
+                type="number"
+                min={145}
+                max={198}
+                step={0.01}
+                defaultValue={145}
                 style={{
                   border: "1px solid #cbd5e1",
                   padding: "0.8rem",
@@ -411,6 +428,17 @@ export default function Form() {
               Calculate Prediction
             </button>
           </Card>
+
+          {result && (
+            <div className="mt-4 p-6 bg-white rounded-lg shadow text-center">
+              <h2 className="text-2xl font-bold mb-2">Prediction Result</h2>
+
+              <p className="text-lg text-gray-700">
+                Your predicted obesity category is:{" "}
+                <span className="font-semibold text-blue-600">{result}</span>
+              </p>
+            </div>
+          )}
         </form>
       </div>
     </div>

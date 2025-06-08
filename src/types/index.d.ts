@@ -5,7 +5,9 @@ export default interface ModelAttributes {
     gender: "Male" | "Female",
     age: number
     weight: number,
+    height: number,
     family_history: "yes" | "no",
+
     favc: "yes" | "no",
     fcvc: number,
     ncp: number,

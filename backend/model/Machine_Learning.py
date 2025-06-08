@@ -31,14 +31,14 @@ import scipy.stats as sp
 
 # %% [markdown]
 # ## Data Import
-# Using pandas to import the data from "Obesity prediction.csv" as a dataframe -> Matrix Like object.
+# Using pandas to import the data from "Obesity_prediction.csv" as a dataframe -> Matrix Like object.
 
 # %%
 # import kagglehub
 
 # Download latest version
-# path = kagglehub.dataset_download("ruchikakumbhar/obesity-prediction") + "/Obesity prediction.csv"
-path = './Obesity prediction.csv'
+# path = kagglehub.dataset_download("ruchikakumbhar/obesity-prediction") + "/Obesity_prediction.csv"
+path = './Obesity_prediction.csv'
 
 print("Path to dataset files:", path)
 

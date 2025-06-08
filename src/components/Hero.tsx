@@ -22,12 +22,12 @@ export default function Hero() {
             metrics to provide an accurate risk assesment
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+            <a
+              href="#form"
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2"
+            >
               Start Prediction <ArrowRight className="h-5 w-5" />
-            </button>
-            <button className="border-2 border-gray-300 text-gray-700 px-8 py-4 rounded-full font-semibold text-lg hover:border-blue-500 hover:text-blue-600 transition-colors duration-300">
-              Learn More
-            </button>
+            </a>
           </div>
         </div>
       </div>

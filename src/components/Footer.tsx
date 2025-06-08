@@ -10,12 +10,11 @@ export default function Footer() {
             </div>
           </div>
           <p className="text-gray-400 text-lg mb-4">
-            HealthPredict - AI-Powered Obesity Risk Assessment
+            ObeSense - AI-Powered Obesity Risk Assessment
           </p>
           <p className="text-gray-500 text-sm">
-            © 2025 HealthPredict. All rights reserved. This tool is for
-            informational purposes only and should not replace professional
-            medical advice.
+            © 2025 ObeSense. All rights reserved. This tool is for informational
+            purposes only and should not replace professional medical advice.
           </p>
         </div>
       </div>
