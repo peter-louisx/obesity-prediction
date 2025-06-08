@@ -1,2 +1,3 @@
-kagglehub
+git+https://github.com/Kaggle/kagglehub.git
 runipy
+xgboost
