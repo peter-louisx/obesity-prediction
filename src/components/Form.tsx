@@ -459,19 +459,19 @@ export default function Form() {
                 </span>
               </p>
               <p className="mt-4 text-gray-600">
-                {result === "Insufficient_Weight" &&
+                {result === "Insufficient Weight" &&
                   "You are predicted to be underweight. This means your weight is below the healthy range for your height, which may increase the risk of health issues. Consider consulting a healthcare professional for personalized advice."}
-                {result === "Normal_Weight" &&
+                {result === "Normal Weight" &&
                   "You are predicted to have a normal weight. This means your weight is within the healthy range for your height. Continue maintaining a balanced diet and regular physical activity."}
-                {result === "Overweight_Level_I" &&
+                {result === "Overweight Level I" &&
                   "You are predicted to be overweight (Level I). This means your weight is above the healthy range for your height, which may increase the risk of health problems. Consider adopting healthier eating habits and increasing physical activity."}
-                {result === "Overweight_Level_II" &&
+                {result === "Overweight Level II" &&
                   "You are predicted to be overweight (Level II). This indicates a higher level of excess weight, which can further increase health risks. It is recommended to consult a healthcare provider for guidance."}
-                {result === "Obesity_Type_I" &&
+                {result === "Obesity Type I" &&
                   "You are predicted to have Obesity Type I. This means your weight is significantly above the healthy range, increasing the risk of chronic diseases. Professional medical advice and lifestyle changes are strongly recommended."}
-                {result === "Obesity_Type_II" &&
+                {result === "Obesity Type II" &&
                   "You are predicted to have Obesity Type II. This is a more severe form of obesity, associated with higher health risks. Please consult a healthcare professional for a comprehensive health plan."}
-                {result === "Obesity_Type_III" &&
+                {result === "Obesity Type III" &&
                   "You are predicted to have Obesity Type III. This is the most severe level of obesity and poses serious health risks. Immediate medical attention and intervention are highly recommended."}
               </p>
             </div>
