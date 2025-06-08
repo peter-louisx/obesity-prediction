@@ -3,14 +3,20 @@ import "./../styles/select-field.css";
 
 export default function SelectField({
   options,
+  onChange,
+  value,
 }: {
   options: { value: string; label: string }[];
+  onChange?: (selectedOption: { value: string; label: string } | null) => void;
+  value?: { value: string; label: string } | null;
 }) {
   return (
     <Select
       options={options}
       className="react-select-container"
       classNamePrefix="react-select"
+      onChange={onChange}
+      value={value}
       styles={{
         container: (base) => ({
           ...base,

@@ -14,9 +14,9 @@ export default function Card({
   children: ReactNode;
 }) {
   return (
-    <div className="card-container">
+    <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
       {(icon || title) && (
-        <div className="card-title-container">
+        <div className="card-title-container flex justify-center gap-4">
           <>
             {icon &&
               (() => {
@@ -24,16 +24,18 @@ export default function Card({
                   icon
                 ] as React.ComponentType<any>;
                 return LucideIcon ? (
-                  <div className="card-icon">
-                    <LucideIcon />
+                  <div className="">
+                    <LucideIcon size={40} />
                   </div>
                 ) : null;
               })()}
-            {title && <h2 className="card-title">{title}</h2>}
+            {title && (
+              <h2 className="card-title text-2xl font-bold">{title}</h2>
+            )}
           </>
         </div>
       )}
-      <div className="card-content">{children}</div>
+      <div className="card-content flex flex-col gap-4 mt-8">{children}</div>
     </div>
   );
 }
