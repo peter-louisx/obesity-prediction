@@ -112,9 +112,14 @@ export default function Form() {
         <div className="main-title">
           <h1 className="text-4xl font-bold">Get Your Health Prediction</h1>
         </div>
-        <p className="mt-2 text-lg text-gray-600">
+        <p className="mt-2 text-lg text-gray-600 mt-8">
           Please fill out this comprehensive form to assess your obesity risk
-          factors. All information is confidential.
+          factors. <br />
+          All information is{" "}
+          <strong>confidential and will not be saved.</strong>{" "}
+          <strong>
+            Fill with honesty to get the best and most appropriate result.
+          </strong>
         </p>
       </div>
       <div>
@@ -123,6 +128,11 @@ export default function Form() {
           onSubmit={handleSubmit(onSubmit)}
         >
           <Card icon="UserCheck" title="General information">
+            <p className="mt-2 text-lg text-gray-600">
+              General information regarding yourself that helps equating the
+              risk and severity of obesity.
+            </p>
+
             {/* Gender */}
             <div className="field">
               <label>Gender:</label>
@@ -192,6 +202,10 @@ export default function Form() {
           </Card>
 
           <Card title="Daily Habits" icon="AlarmClock">
+            <p className="mt-2 text-lg text-gray-600">
+              Daily habits that contributes to the risk and severity of obesity.
+            </p>
+
             {/* Vegetables Consumption */}
             <div className="field">
               <label>Do you usually eat vegetables in your meals?</label>
@@ -250,6 +264,11 @@ export default function Form() {
                 options={technologyUsageOptions}
               />
             </div>
+
+            <p className="mt-2 text-lg text-center text-gray-600">
+              Once all information has been field, press the button below to get
+              your prediction.
+            </p>
 
             <button
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-full font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transform hover:-translate-y-1 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2 mx-auto mt-5"
