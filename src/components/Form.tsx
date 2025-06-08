@@ -1,33 +1,32 @@
 import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ModelAttributes, { ObesityCategoryType } from "../types/index";
 import predict from "../api/api.tsx";
 import Card from "./card.tsx";
 import SelectField from "./select-field.tsx";
-import { Calculator } from "lucide-react";
+import { Calculator, Loader2Icon } from "lucide-react";
 
 export default function Form() {
   const [result, setResult] = useState<ObesityCategoryType>();
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const schema = z.object({
     gender: z.enum(["Male", "Female"]),
-    // age: z.number().min(14).max(61),
     age: z.number(),
     height: z.number().min(145).max(198),
     weight: z.number(),
-    // weight: z.number().min(39).max(173),
     family_history: z.enum(["yes", "no"]),
     favc: z.enum(["yes", "no"]),
-    fcvc: z.number().refine((num) => num in [1, 2, 3]),
-    ncp: z.number().refine((num) => num in [1, 2, 3, 4]),
+    fcvc: z.number(),
+    ncp: z.number(),
     caec: z.enum(["Always", "Frequently", "Sometimes", "no"]),
     smoke: z.enum(["yes", "no"]),
-    ch2o: z.number().refine((num) => num in [1, 2, 3]),
+    ch2o: z.number(),
     scc: z.enum(["yes", "no"]),
-    faf: z.number().refine((num) => num in [1, 2, 3]),
-    tue: z.number().refine((num) => num in [0, 1, 2]),
+    faf: z.number(),
+    tue: z.number(),
     calc: z.enum(["Always", "Frequently", "Sometimes", "no"]),
     mtrans: z.enum([
       "Public_Transportation",
@@ -58,8 +57,16 @@ export default function Form() {
       mtrans: data.mtrans,
     };
 
-    const res = await predict(input);
-    setResult(res.data.prediction as ObesityCategoryType);
+    setSubmitLoading(true);
+
+    try {
+      const res = await predict(input);
+      setResult(res.data.prediction as ObesityCategoryType);
+    } catch (error) {
+      console.error("Error during prediction:", error);
+    } finally {
+      setSubmitLoading(false);
+    }
   };
 
   const capitalize = (str: string) =>
@@ -80,9 +87,7 @@ export default function Form() {
   const {
     register,
     handleSubmit,
-    control,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
@@ -164,7 +169,10 @@ export default function Form() {
   );
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 to-blue-50" id="form">
+    <div
+      className="bg-gradient-to-br from-gray-50 to-blue-50 h-full pb-12"
+      id="form"
+    >
       <div className="text-center py-12">
         <div className="main-title">
           <h1 className="text-4xl font-bold">Get Your Health Prediction</h1>
@@ -352,6 +360,7 @@ export default function Form() {
               <label>How often do you have physical activity?</label>
               <SelectField
                 onChange={(selectedOption) => {
+                  console.log("Selected option:", selectedOption);
                   setValue("faf", Number(selectedOption?.value));
                 }}
                 options={physicalActivitiesOptions}
@@ -424,18 +433,46 @@ export default function Form() {
                 console.log("Form submitted with data:", errors);
               }}
             >
-              <Calculator className="h-5 w-5" />
-              Calculate Prediction
+              {submitLoading && (
+                <>
+                  <Loader2Icon className="animate-spin h-5 w-5 mr-2" />
+                  Calculating...
+                </>
+              )}
+
+              {!submitLoading && (
+                <>
+                  <Calculator className="h-5 w-5 mr-2" />
+                  Calculate Prediction
+                </>
+              )}
             </button>
           </Card>
 
           {result && (
-            <div className="mt-4 p-6 bg-white rounded-lg shadow text-center">
-              <h2 className="text-2xl font-bold mb-2">Prediction Result</h2>
+            <div className="mt-4 p-6 bg-white rounded-lg shadow text-center py-8">
+              <h2 className="text-4xl font-bold mb-2">Prediction Result</h2>
 
-              <p className="text-lg text-gray-700">
-                Your predicted obesity category is:{" "}
-                <span className="font-semibold text-blue-600">{result}</span>
+              <p className="text-lg text-gray-700 mt-4">
+                <span className="font-semibold text-2xl text-blue-600">
+                  {result}
+                </span>
+              </p>
+              <p className="mt-4 text-gray-600">
+                {result === "Insufficient_Weight" &&
+                  "You are predicted to be underweight. This means your weight is below the healthy range for your height, which may increase the risk of health issues. Consider consulting a healthcare professional for personalized advice."}
+                {result === "Normal_Weight" &&
+                  "You are predicted to have a normal weight. This means your weight is within the healthy range for your height. Continue maintaining a balanced diet and regular physical activity."}
+                {result === "Overweight_Level_I" &&
+                  "You are predicted to be overweight (Level I). This means your weight is above the healthy range for your height, which may increase the risk of health problems. Consider adopting healthier eating habits and increasing physical activity."}
+                {result === "Overweight_Level_II" &&
+                  "You are predicted to be overweight (Level II). This indicates a higher level of excess weight, which can further increase health risks. It is recommended to consult a healthcare provider for guidance."}
+                {result === "Obesity_Type_I" &&
+                  "You are predicted to have Obesity Type I. This means your weight is significantly above the healthy range, increasing the risk of chronic diseases. Professional medical advice and lifestyle changes are strongly recommended."}
+                {result === "Obesity_Type_II" &&
+                  "You are predicted to have Obesity Type II. This is a more severe form of obesity, associated with higher health risks. Please consult a healthcare professional for a comprehensive health plan."}
+                {result === "Obesity_Type_III" &&
+                  "You are predicted to have Obesity Type III. This is the most severe level of obesity and poses serious health risks. Immediate medical attention and intervention are highly recommended."}
               </p>
             </div>
           )}
