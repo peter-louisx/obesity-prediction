@@ -23,6 +23,7 @@ def predict():
             'FAF': float(request.json['faf']),
             'TUE': float(request.json['tue']),
             'Gender': request.json['gender'],
+            'CAEC': request.json['caec'],
         }])
         
         pred = model.predict(input_df)
