@@ -66,13 +66,9 @@ export default function Form() {
 
   const processLabel = (str: string) => removeUnderScore(capitalize(str));
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-    getValues,
-  } = useForm<z.infer<typeof schema>>({
+  const { register, handleSubmit, setValue, getValues } = useForm<
+    z.infer<typeof schema>
+  >({
     resolver: zodResolver(schema),
   });
 
