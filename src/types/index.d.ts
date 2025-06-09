@@ -11,6 +11,7 @@ export default interface ModelAttributes {
   faf: number;
   tue: number;
   gender: "Male" | "Female";
+  caec: "Always" | "Frequently" | "Sometimes" | "no";
 }
 
 export type ObesityCategoryType =

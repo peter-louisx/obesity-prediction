@@ -22,6 +22,7 @@ export default function Form() {
     ch2o: z.number(),
     faf: z.number(),
     tue: z.number(),
+    caec: z.enum(["Always", "Frequently", "Sometimes", "no"]),
   });
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
@@ -35,6 +36,7 @@ export default function Form() {
       ch2o: data.ch2o,
       faf: data.faf,
       tue: data.tue,
+      caec: data.caec,
     };
 
     setSubmitLoading(true);
@@ -69,11 +71,16 @@ export default function Form() {
     handleSubmit,
     setValue,
     formState: { errors },
+    getValues,
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
 
   const genderOptions = schema.shape.gender._def.values.map((option) => ({
+    value: option,
+    label: processLabel(option),
+  }));
+  const caecOptions = schema.shape.caec._def.values.map((option) => ({
     value: option,
     label: processLabel(option),
   }));
@@ -112,7 +119,7 @@ export default function Form() {
         <div className="main-title">
           <h1 className="text-4xl font-bold">Get Your Health Prediction</h1>
         </div>
-        <p className="mt-2 text-lg text-gray-600 mt-8">
+        <p className="text-lg text-gray-600 mt-8">
           Please fill out this comprehensive form to assess your obesity risk
           factors. <br />
           All information is{" "}
@@ -206,6 +213,24 @@ export default function Form() {
               Daily habits that contributes to the risk and severity of obesity.
             </p>
 
+            {/* Food Between Meals Frequency */}
+            <div className="field">
+              <label>Do you eat any food between meals?</label>
+              <SelectField
+                onChange={(selectedOption) => {
+                  setValue(
+                    "caec",
+                    selectedOption?.value as
+                      | "Always"
+                      | "Frequently"
+                      | "Sometimes"
+                      | "no"
+                  );
+                }}
+                options={caecOptions}
+              />
+            </div>
+
             {/* Vegetables Consumption */}
             <div className="field">
               <label>Do you usually eat vegetables in your meals?</label>
@@ -266,8 +291,8 @@ export default function Form() {
             </div>
 
             <p className="mt-2 text-lg text-center text-gray-600">
-              Once all information has been field, press the button below to get
-              your prediction.
+              Once all information has been filled, press the button below to
+              get your prediction.
             </p>
 
             <button
@@ -275,14 +300,7 @@ export default function Form() {
               type="submit"
               //print zod errors onclick
               onClick={() => {
-                if (!Object.keys(schema.safeParse({})).length) {
-                  //print errors
-                  console.error(
-                    "Form validation errors:",
-                    schema.safeParse({}).error
-                  );
-                }
-                console.log("Form submitted with data:", errors);
+                console.log(getValues());
               }}
             >
               {submitLoading && (
