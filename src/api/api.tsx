@@ -1,7 +1,7 @@
 import axios from "axios";
 import ModelAttributes from "../types";
 
-const API_URL = "https://obesense-backend-production.up.railway.app/api/"
+const API_URL = "https://obesense-backend-production.up.railway.app/";
 
 export default async function predict(input: ModelAttributes) {
   return await axios.request({
