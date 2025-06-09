@@ -6,7 +6,7 @@ const API_URL = "https://obesense-backend-production.up.railway.app/";
 export default async function predict(input: ModelAttributes) {
   return await axios.request({
     method: "POST",
-    url: `${API_URL}/api/predict`,
+    url: `${API_URL}api/predict`,
     data: input,
     headers: {
       Accept: "application/json",
