@@ -2,6 +2,7 @@
   "name": "obesity-prediction-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://peter-louisx.github.io/obesity-prediction",
   "dependencies": {
     "@hookform/resolvers": "^4.1.1",
     "@testing-library/dom": "^10.4.0",
